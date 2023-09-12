@@ -7,7 +7,7 @@ import java.util.Date;
 @Table(name = "TASKS")
 public class Tasks {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id", nullable = false)
     private Long taskId;
 
@@ -21,10 +21,12 @@ public class Tasks {
     @Column(nullable = false)
     private Date deadline;
 
-    @OneToOne(mappedBy = "categoryId")
-    private TaskCategory categoryId;
+ //   @OneToOne(mappedBy = "categoryId")
+    @ManyToOne
+    @JoinColumn(name = "category_id_category_id")
+    private TaskCategories categoryId;
 
-    public Tasks(String taskName, String taskDescription, Date deadline, TaskCategory categoryId) {
+    public Tasks(String taskName, String taskDescription, Date deadline, TaskCategories categoryId) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.deadline = deadline;
@@ -67,11 +69,11 @@ public class Tasks {
         this.deadline = deadline;
     }
 
-    public TaskCategory getCategoryId() {
+    public TaskCategories getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(TaskCategory categoryId) {
+    public void setCategoryId(TaskCategories categoryId) {
         this.categoryId = categoryId;
     }
 }

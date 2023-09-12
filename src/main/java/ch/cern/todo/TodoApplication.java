@@ -1,6 +1,6 @@
 package ch.cern.todo;
 
-import ch.cern.todo.entities.TaskCategory;
+import ch.cern.todo.entities.TaskCategories;
 import ch.cern.todo.repositories.TaskCategoryRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,12 +14,14 @@ public class TodoApplication {
 		SpringApplication.run(TodoApplication.class, args);
 	}
 
+
 	@Bean
 	public CommandLineRunner run(TaskCategoryRepository taskCategoryRepository) throws Exception {
+		System.out.println("CommandLineRunner");
 		return (String[] args) -> {
-			TaskCategory tc1 = new TaskCategory("testCategorie", "categorie test");
+			TaskCategories tc1 = new TaskCategories("testCategorie", "categorie test");
 			taskCategoryRepository.save(tc1);
-			taskCategoryRepository.findAll().forEach(taskCategory -> System.out.println(taskCategory));
+			taskCategoryRepository.findAll().forEach(System.out::println);
 		};
-	}
+    }
 }

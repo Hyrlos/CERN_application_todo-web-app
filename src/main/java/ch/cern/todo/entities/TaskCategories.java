@@ -1,14 +1,12 @@
 package ch.cern.todo.entities;
 
-import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "TASK_CATEGORIES")
-public class TaskCategory {
+public class TaskCategories {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_Id", nullable = false)
     private Long categoryId;
 
@@ -19,12 +17,12 @@ public class TaskCategory {
     @Column(length = 500)
     private String categoryDescription;
 
-    public TaskCategory(String categoryName, String categoryDescription) {
+    public TaskCategories(String categoryName, String categoryDescription) {
         this.categoryName = categoryName;
         this.categoryDescription = categoryDescription;
     }
 
-    public TaskCategory() {
+    public TaskCategories() {
     }
 
     public void setCategoryName(String categoryName) {
@@ -49,5 +47,14 @@ public class TaskCategory {
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    @Override
+    public String toString() {
+        return "TaskCategory{" +
+                "categoryId=" + categoryId +
+                ", categoryName='" + categoryName + '\'' +
+                ", categoryDescription='" + categoryDescription + '\'' +
+                '}';
     }
 }
