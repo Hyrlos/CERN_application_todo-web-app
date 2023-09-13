@@ -12,62 +12,62 @@ import java.util.List;
 
 @RestController
 public class TaskCategoryController {
-        private final TaskCategoryRepository tcRepository;
-        private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+    private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+    private final TaskCategoryRepository tcRepository;
 
-        TaskCategoryController(TaskCategoryRepository tcRepository) {
-                this.tcRepository = tcRepository;
-        }
+    TaskCategoryController(TaskCategoryRepository tcRepository) {
+        this.tcRepository = tcRepository;
+    }
 
-        // Get ALL
-        @GetMapping("/taskCategory")
-        List<TaskCategory> getAllTaskCategory() {
-                log.debug("Get all TaskCategory");
-                return tcRepository.findAll();
-        }
+    // Get ALL
+    @GetMapping("/taskCategory")
+    List<TaskCategory> getAllTaskCategory() {
+        log.debug("Get all TaskCategory");
+        return tcRepository.findAll();
+    }
 
-        // Get category by id
-        @GetMapping("/taskCategory/{categoryId}")
-        TaskCategory getOneTaskCategory(@PathVariable Long categoryId) {
-                TaskCategory tcGet = tcRepository.findById(categoryId)
-                        .orElseThrow(() -> new TaskCategoryNotFoundException(categoryId));
+    // Get category by id
+    @GetMapping("/taskCategory/{categoryId}")
+    TaskCategory getOneTaskCategory(@PathVariable Long categoryId) {
+        TaskCategory tcGet = tcRepository.findById(categoryId)
+                .orElseThrow(() -> new TaskCategoryNotFoundException(categoryId));
 
-                log.debug("Get TaskCategory " + categoryId + ": " + tcGet);
-                return tcGet;
-        }
+        log.debug("Get TaskCategory " + categoryId + ": " + tcGet);
+        return tcGet;
+    }
 
 
-        // Post to create
-        @PostMapping("/taskCategory")
-        TaskCategory newTaskCategory(@RequestBody TaskCategory newTaskCategory) {
-                TaskCategory tcPosted = tcRepository.save(newTaskCategory);
-                log.debug("Post TaskCategory: " + tcPosted);
-                return tcPosted;
-        }
+    // Post to create
+    @PostMapping("/taskCategory")
+    TaskCategory newTaskCategory(@RequestBody TaskCategory newTaskCategory) {
+        TaskCategory tcPosted = tcRepository.save(newTaskCategory);
+        log.debug("Post TaskCategory: " + tcPosted);
+        return tcPosted;
+    }
 
-        // Edit
-        @PutMapping("/taskCategory/{categoryId}")
-        TaskCategory replaceTaskCategory(@RequestBody TaskCategory newTaskCategory, @PathVariable Long categoryId) {
+    // Edit
+    @PutMapping("/taskCategory/{categoryId}")
+    TaskCategory replaceTaskCategory(@RequestBody TaskCategory newTaskCategory, @PathVariable Long categoryId) {
 
-                return tcRepository.findById(categoryId)
-                        .map(taskCategory -> {
-                                taskCategory.setCategoryName(newTaskCategory.getCategoryName());
-                                taskCategory.setCategoryDescription(newTaskCategory.getCategoryDescription());
-                                TaskCategory tcPutted = tcRepository.save(taskCategory);
-                                log.debug("Put TaskCategory: " + tcPutted);
-                                return tcPutted;
-                        })
-                        .orElseGet(() -> { // If taskCategory not found a new taskCategory is created with the provided id
-                                TaskCategory tcPutted = tcRepository.save(newTaskCategory);
-                                log.debug("Put TaskCategory: " + tcPutted);
-                                return tcPutted;
-                        });
-        }
+        return tcRepository.findById(categoryId)
+                .map(taskCategory -> {
+                    taskCategory.setCategoryName(newTaskCategory.getCategoryName());
+                    taskCategory.setCategoryDescription(newTaskCategory.getCategoryDescription());
+                    TaskCategory tcPutted = tcRepository.save(taskCategory);
+                    log.debug("Put TaskCategory: " + tcPutted);
+                    return tcPutted;
+                })
+                .orElseGet(() -> { // If taskCategory not found a new taskCategory is created with the provided id
+                    TaskCategory tcPutted = tcRepository.save(newTaskCategory);
+                    log.debug("Put TaskCategory: " + tcPutted);
+                    return tcPutted;
+                });
+    }
 
-        // Delete one
-        @DeleteMapping("/taskCategory/{categoryId}")
-        void deleteTaskCategory(@PathVariable Long categoryId) {
-                log.debug("Delete TaskCategory " + categoryId + ": " + tcRepository.findById(categoryId));
-                tcRepository.deleteById(categoryId);
-        }
+    // Delete one
+    @DeleteMapping("/taskCategory/{categoryId}")
+    void deleteTaskCategory(@PathVariable Long categoryId) {
+        log.debug("Delete TaskCategory " + categoryId + ": " + tcRepository.findById(categoryId));
+        tcRepository.deleteById(categoryId);
+    }
 }

@@ -1,5 +1,6 @@
 package ch.cern.todo.controller;
 
+import ch.cern.todo.entity.Task;
 import ch.cern.todo.entity.TaskCategory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,6 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -21,72 +23,68 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class TaskCategoryControllerTest {
+class TaskControllerTest {
 
     @Autowired
     private MockMvc mvc;
 
     @Test
-    void testGetAllTaskCategory() throws Exception {
-        mvc.perform(get("/taskCategory"))
-                .andExpect(status().isOk())
-                .andReturn();
-    }
-
-    /**
-     * Get all the taskCategory to get one existing taskCategory
-     */
-    @Test
-    void testGetOneTaskCategory() throws Exception {
-        long categoryIdFirst = getFirstTaskCategory().get(0).getCategoryId();
-
-        mvc.perform(get("/taskCategory/" + categoryIdFirst))
+    void getAllTask() throws Exception {
+        mvc.perform(get("/task"))
                 .andExpect(status().isOk())
                 .andReturn();
     }
 
     @Test
-    void testNewTaskCategory() throws Exception {
-        TaskCategory tc1 = new TaskCategory("AddedCategory", "AddedCategoryDescription");
-        mvc.perform(post("/taskCategory")
+    void getOneTask() throws Exception {
+        long firstTaskId = getFirstTask().get(0).getTaskId();
+
+        mvc.perform(get("/task/" + firstTaskId))
+                .andExpect(status().isOk())
+                .andReturn();
+    }
+
+    @Test
+    void newTask() throws Exception {
+        TaskCategory tc = getFirstTaskCategory().get(0);
+        Date randomFutureDate = new Date((long) ((new Date().getTime()) + Math.random() * 100000000));
+
+        Task t1 = new Task("AddedTask", "Added Task Description",
+                randomFutureDate, tc);
+        mvc.perform(post("/task")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(tc1)))
+                        .content(asJsonString(t1)))
                 .andExpect(status().isOk())
                 .andReturn();
     }
 
-
-    /**
-     * Get all the taskCategory to replace one existing taskCategory
-     */
     @Test
-    void testReplaceTaskCategory() throws Exception {
-        TaskCategory firstCategory = getFirstTaskCategory().get(0);
-        firstCategory.setCategoryName("PuttedCategory");
-        firstCategory.setCategoryDescription("Putted Category Description");
+    void replaceTask() throws Exception {
+        Task firstTask = getFirstTask().get(0);
+        firstTask.setTaskName("PuttedTask");
+        firstTask.setTaskDescription("Putted Task Description");
 
-        mvc.perform(put("/taskCategory/" + firstCategory.getCategoryId())
+
+        mvc.perform(post("/task")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(firstCategory)))
+                        .content(asJsonString(firstTask)))
                 .andExpect(status().isOk())
                 .andReturn();
     }
 
-    /**
-     * Get all the taskCategory to delete one existing taskCategory
-     */
     @Test
-    void testDeleteTaskCategory() throws Exception {
-        long categoryIdFirst = getFirstTaskCategory().get(0).getCategoryId();
+    void deleteTask() throws Exception {
+        long firstTaskId = getFirstTask().get(0).getTaskId();
 
-        mvc.perform(delete("/taskCategory/" + categoryIdFirst))
+        mvc.perform(delete("/task/" + firstTaskId))
                 .andExpect(status().isOk())
                 .andReturn();
     }
 
-    private String asJsonString(TaskCategory tc1) {
+
+    private String asJsonString(Task t1) {
         try {
-            return new ObjectMapper().writeValueAsString(tc1);
+            return new ObjectMapper().writeValueAsString(t1);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -98,6 +96,21 @@ class TaskCategoryControllerTest {
     private List<TaskCategory> getFirstTaskCategory() throws Exception {
 
         MvcResult resultAll = mvc.perform(get("/taskCategory"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String content = resultAll.getResponse().getContentAsString();
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(content, new TypeReference<>() {
+        });
+    }
+
+    /**
+     * Return the list of all TaskCategory
+     */
+    private List<Task> getFirstTask() throws Exception {
+
+        MvcResult resultAll = mvc.perform(get("/task"))
                 .andExpect(status().isOk())
                 .andReturn();
 
