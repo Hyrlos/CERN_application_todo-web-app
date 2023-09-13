@@ -1,11 +1,14 @@
-package ch.cern.todo.entities;
+package ch.cern.todo.entity;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "TASKS")
-public class Tasks {
+@EnableAutoConfiguration
+@Table(name = "TASK")
+public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id", nullable = false)
@@ -24,16 +27,16 @@ public class Tasks {
  //   @OneToOne(mappedBy = "categoryId")
     @ManyToOne
     @JoinColumn(name = "category_id_category_id")
-    private TaskCategories categoryId;
+    private TaskCategory categoryId;
 
-    public Tasks(String taskName, String taskDescription, Date deadline, TaskCategories categoryId) {
+    public Task(String taskName, String taskDescription, Date deadline, TaskCategory categoryId) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.deadline = deadline;
         this.categoryId = categoryId;
     }
 
-    public Tasks() {
+    public Task() {
 
     }
 
@@ -69,11 +72,11 @@ public class Tasks {
         this.deadline = deadline;
     }
 
-    public TaskCategories getCategoryId() {
+    public TaskCategory getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(TaskCategories categoryId) {
+    public void setCategoryId(TaskCategory categoryId) {
         this.categoryId = categoryId;
     }
 }
