@@ -24,9 +24,9 @@ public class Task {
     @Column(nullable = false)
     private Date deadline;
 
- //   @OneToOne(mappedBy = "categoryId")
+    //   @OneToOne(mappedBy = "categoryId")
     @ManyToOne
-    @JoinColumn(name = "category_id_category_id")
+    @JoinColumn(name = "task_id_category_id")
     private TaskCategory categoryId;
 
     public Task(String taskName, String taskDescription, Date deadline, TaskCategory categoryId) {
@@ -40,12 +40,9 @@ public class Task {
 
     }
 
+
     public Long getTaskId() {
         return taskId;
-    }
-
-    public void setTaskId(Long taskId) {
-        this.taskId = taskId;
     }
 
     public String getTaskName() {
@@ -78,5 +75,16 @@ public class Task {
 
     public void setCategoryId(TaskCategory categoryId) {
         this.categoryId = categoryId;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "taskId=" + taskId +
+                ", taskName='" + taskName + '\'' +
+                ", taskDescription='" + taskDescription + '\'' +
+                ", deadline=" + deadline +
+                ", categoryId=" + categoryId +
+                '}';
     }
 }
