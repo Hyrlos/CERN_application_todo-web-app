@@ -22,12 +22,12 @@ public class LoadDatabase {
     CommandLineRunner initDatabase(TaskCategoryRepository tcRepository, TaskRepository taskRepository) {
 
         return args -> {
-            TaskCategory tc = tcRepository.save(new TaskCategory("testCategories", "categorie test"));
+            TaskCategory tc = tcRepository.save(new TaskCategory("TaskCategoriesPreloaded", "Task Categories Preloaded"));
             log.info("Preloading " + tc);
 
             Date randomFutureDate = new Date((long) ((new Date().getTime()) + Math.random() * 100000000));
             Task task = taskRepository.save(
-                    new Task("TodoPreloaded", "Todo Preloaded Description",
+                    new Task("TaskPreloaded", "Task Preloaded Description",
                             randomFutureDate, tc));
 
             log.info("Preloading " + task);
