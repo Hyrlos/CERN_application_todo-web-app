@@ -1,8 +1,11 @@
 package ch.cern.todo.entities;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+
 import javax.persistence.*;
 
 @Entity
+@EnableAutoConfiguration
 @Table(name = "TASK_CATEGORIES")
 public class TaskCategories {
     @Id
