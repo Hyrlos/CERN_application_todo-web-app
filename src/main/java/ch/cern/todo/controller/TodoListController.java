@@ -1,4 +1,4 @@
-package ch.cern.todo.controllers;
+package ch.cern.todo.controller;
 
 public class TodoListController {
 }

@@ -1,4 +1,4 @@
-package ch.cern.todo.entities;
+package ch.cern.todo.entity;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
@@ -6,8 +6,8 @@ import javax.persistence.*;
 
 @Entity
 @EnableAutoConfiguration
-@Table(name = "TASK_CATEGORIES")
-public class TaskCategories {
+@Table(name = "TASK_CATEGORY")
+public class TaskCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_Id", nullable = false)
@@ -20,12 +20,12 @@ public class TaskCategories {
     @Column(length = 500)
     private String categoryDescription;
 
-    public TaskCategories(String categoryName, String categoryDescription) {
+    public TaskCategory(String categoryName, String categoryDescription) {
         this.categoryName = categoryName;
         this.categoryDescription = categoryDescription;
     }
 
-    public TaskCategories() {
+    public TaskCategory() {
     }
 
     public void setCategoryName(String categoryName) {
