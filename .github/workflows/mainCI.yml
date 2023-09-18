@@ -4,6 +4,7 @@ on:
 
 jobs:
   build:
+    runs-on: ubuntu-latest
     steps:
       # This step uses the actions/checkout action to download a copy of your repository on the runner
       - name: download a copy of the repository on the runner
