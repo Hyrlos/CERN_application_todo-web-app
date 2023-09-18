@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.6.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id "org.sonarqube" version "4.3.1.3277"
 }
 
 group = 'ch.cern'
@@ -22,4 +23,13 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+
+sonar {
+	properties {
+		property "sonar.projectKey", "githubtg_githubcern"
+		property "sonar.organization", "githubtg"
+		property "sonar.host.url", "https://sonarcloud.io"
+	}
 }
