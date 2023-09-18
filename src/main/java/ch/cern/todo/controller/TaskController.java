@@ -22,7 +22,7 @@ public class TaskController {
     // Get ALL
     @GetMapping("/task")
     List<Task> getAllTask() {
-        log.debug("Get all Task");
+        log.info("Get all Task");
         return taskRepository.findAll();
     }
 
@@ -32,7 +32,7 @@ public class TaskController {
         Task taskGet = taskRepository.findById(taskId)
                 .orElseThrow(() -> new TaskNotFoundException(taskId));
 
-        log.debug("Get Task " + taskId + ": " + taskGet);
+        log.info("Get Task " + taskId + ": " + taskGet);
         return taskGet;
     }
 
@@ -41,7 +41,7 @@ public class TaskController {
     @PostMapping("/task")
     Task newTask(@RequestBody Task newTask) {
         Task taskPosted = taskRepository.save(newTask);
-        log.debug("Post Task: " + taskPosted);
+        log.info("Post Task: " + taskPosted);
         return taskPosted;
     }
 
@@ -56,12 +56,12 @@ public class TaskController {
                     task.setDeadline(newTask.getDeadline());
                     task.setCategoryId(newTask.getCategoryId());
                     Task tcPutted = taskRepository.save(task);
-                    log.debug("Put Task: " + tcPutted);
+                    log.info("Put Task: " + tcPutted);
                     return tcPutted;
                 })
                 .orElseGet(() -> { // If task not found a new task is created with the provided id
                     Task taskPutted = taskRepository.save(newTask);
-                    log.debug("Put Task: " + taskPutted);
+                    log.info("Put Task: " + taskPutted);
                     return taskPutted;
                 });
     }
@@ -69,7 +69,7 @@ public class TaskController {
     // Delete one
     @DeleteMapping("/task/{taskId}")
     void deleteTask(@PathVariable Long taskId) {
-        log.debug("Delete Task " + taskId + ": " + taskRepository.findById(taskId));
+        log.info("Delete Task " + taskId + ": " + taskRepository.findById(taskId));
         taskRepository.deleteById(taskId);
     }
 }

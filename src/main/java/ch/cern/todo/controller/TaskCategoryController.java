@@ -22,7 +22,7 @@ public class TaskCategoryController {
     // Get ALL
     @GetMapping("/taskCategory")
     List<TaskCategory> getAllTaskCategory() {
-        log.debug("Get all TaskCategory");
+        log.info("Get all TaskCategory");
         return tcRepository.findAll();
     }
 
@@ -32,7 +32,7 @@ public class TaskCategoryController {
         TaskCategory tcGet = tcRepository.findById(categoryId)
                 .orElseThrow(() -> new TaskCategoryNotFoundException(categoryId));
 
-        log.debug("Get TaskCategory " + categoryId + ": " + tcGet);
+        log.info("Get TaskCategory " + categoryId + ": " + tcGet);
         return tcGet;
     }
 
@@ -41,7 +41,7 @@ public class TaskCategoryController {
     @PostMapping("/taskCategory")
     TaskCategory newTaskCategory(@RequestBody TaskCategory newTaskCategory) {
         TaskCategory tcPosted = tcRepository.save(newTaskCategory);
-        log.debug("Post TaskCategory: " + tcPosted);
+        log.info("Post TaskCategory: " + tcPosted);
         return tcPosted;
     }
 
@@ -54,12 +54,12 @@ public class TaskCategoryController {
                     taskCategory.setCategoryName(newTaskCategory.getCategoryName());
                     taskCategory.setCategoryDescription(newTaskCategory.getCategoryDescription());
                     TaskCategory tcPutted = tcRepository.save(taskCategory);
-                    log.debug("Put TaskCategory: " + tcPutted);
+                    log.info("Put TaskCategory: " + tcPutted);
                     return tcPutted;
                 })
                 .orElseGet(() -> { // If taskCategory not found a new taskCategory is created with the provided id
                     TaskCategory tcPutted = tcRepository.save(newTaskCategory);
-                    log.debug("Put TaskCategory: " + tcPutted);
+                    log.info("Put TaskCategory: " + tcPutted);
                     return tcPutted;
                 });
     }
@@ -67,7 +67,7 @@ public class TaskCategoryController {
     // Delete one
     @DeleteMapping("/taskCategory/{categoryId}")
     void deleteTaskCategory(@PathVariable Long categoryId) {
-        log.debug("Delete TaskCategory " + categoryId + ": " + tcRepository.findById(categoryId));
+        log.info("Delete TaskCategory " + categoryId + ": " + tcRepository.findById(categoryId));
         tcRepository.deleteById(categoryId);
     }
 }
