@@ -41,9 +41,7 @@ public class TaskController {
     @PostMapping("/task")
     Task newTask(@RequestBody Task newTask) {
         log.info("Post  received: " + newTask);
-        Task taskPosted = taskService.save(newTask);
-        log.info("Post Task: " + taskPosted);
-        return taskPosted;
+        return taskService.save(newTask);
     }
 
     // Edit

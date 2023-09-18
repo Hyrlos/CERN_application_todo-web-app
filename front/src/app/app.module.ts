@@ -6,22 +6,20 @@ import {AppRoutingModule} from "./app-routing.module";
 import {TaskComponent} from './task/task.component';
 import {HttpClientModule} from '@angular/common/http';
 import {DateFormatPipe} from "./utils/date-format.pipe";
-import {FormsModule} from "@angular/forms";
 
 @NgModule({
-  declarations: [
-    TaskCategoryComponent,
-    TaskComponent,
-    DateFormatPipe,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
-  providers: [],
-  bootstrap: [TaskCategoryComponent, TaskComponent]
+    declarations: [
+        TaskCategoryComponent,
+        TaskComponent,
+        DateFormatPipe,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule
+    ],
+    providers: [],
+    bootstrap: [TaskCategoryComponent, TaskComponent]
 
 })
 export class AppModule {
