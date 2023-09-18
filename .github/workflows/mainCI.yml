@@ -1,5 +1,4 @@
 name: Java CI with Gradle todoApplication
-define: &SONAR_TOKEN fe7c298524a15ddefbc77a1e9435d5a2f871fb97
 on:
   push:
 
