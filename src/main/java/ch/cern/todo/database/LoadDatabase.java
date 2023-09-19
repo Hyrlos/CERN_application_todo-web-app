@@ -19,14 +19,14 @@ public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(TaskCategoryRepository tcRepository, TaskRepository taskRepository) {
+    CommandLineRunner initDatabase(TaskCategoryRepository tcRepository, TaskRepository taskService) {
 
         return args -> {
             TaskCategory tc = tcRepository.save(new TaskCategory("TaskCategoriesPreloaded", "Task Categories Preloaded"));
             log.info("Preloading " + tc);
 
             Date randomFutureDate = new Date((long) ((new Date().getTime()) + Math.random() * 100000000));
-            Task task = taskRepository.save(
+            Task task = taskService.save(
                     new Task("TaskPreloaded", "Task Preloaded Description",
                             randomFutureDate, tc));
 
