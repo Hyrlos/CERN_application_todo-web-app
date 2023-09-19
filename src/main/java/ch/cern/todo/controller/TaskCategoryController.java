@@ -4,6 +4,7 @@ import ch.cern.todo.database.LoadDatabase;
 import ch.cern.todo.entity.TaskCategory;
 import ch.cern.todo.exception.TaskCategoryNotFoundException;
 import ch.cern.todo.service.TaskCategoryService;
+import ch.cern.todo.service.TaskCategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
