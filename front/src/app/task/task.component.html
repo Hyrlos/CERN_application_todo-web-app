@@ -1,31 +1,85 @@
 <div class="container">
-    <h2>All Tasks:</h2>
-    <table [border]="1">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Deadline</th>
-            <th>Category</th>
-            <th>Edit</th>
-            <th>Remove</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let task of taskList">
-            <td>{{ task.taskId }}</td>
-            <td>{{ task.taskName }}</td>
-            <td>{{ task.taskDescription }}</td>
-            <td>{{ task.deadline | dateFormat }}</td>
-            <td>{{ task.categoryId.categoryName }}</td>
-            <td>Btn Edit</td>
-            <td>
-                <button (click)="delete(task)" class="delete" title="delete hero"
-                        type="button">x
-                </button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+  <h2>All Tasks:</h2>
+  <table [border]="1">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Deadline</th>
+      <th>Category</th>
+      <th>Edit</th>
+      <th>Remove</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let task of taskList">
+      <td>{{ task.taskId }}</td>
+      <td>{{ task.taskName }}</td>
+      <td>{{ task.taskDescription }}</td>
+      <td>{{ task.deadline | dateFormat }}</td>
+      <td>{{ task.taskCategory.categoryName }}</td>
+      <td>Btn Edit</td>
+      <td>
+        <button (click)="delete(task)" class="delete" title="deleteTask"
+                type="button">x
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
+<br>
+<div>
+  <table>
+    <tr>
+      <td>
+        <label for="new-taskName">task name: </label>
+      </td>
+      <td>
+        <input #taskName id="new-taskName"/><br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="new-taskDescription">task description: </label>
+      </td>
+      <td>
+        <input #taskDescription id="new-taskDescription"/><br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="new-taskDeadline">task deadline: </label>
+      </td>
+      <td>
+        <input #taskDeadline id="new-taskDeadline" type="date"/><br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="new-taskCategory">Select a category: </label>
+      </td>
+      <td>
+        <select [(ngModel)]="selectedTaskCategoryId" id="new-taskCategory">
+          <option disabled selected value="">Select a category</option>
+          <option *ngFor="let taskCategory of taskCategoryList"
+                  [value]="taskCategory.categoryId">{{ taskCategory.categoryName }}</option>
+        </select><br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+
+        <button
+          (click)="add(taskName.value, taskDescription.value, taskDeadline.value); taskName.value=''; taskDescription.value=''; taskDeadline.value=''; selectedTaskCategoryId = -1;"
+          class="add-button"
+          type="button">
+          Add category
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
