@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface ITaskService {
     List<Task> findAll();
+
     List<Task> findByCategoryId(Long categoryId);
 
     Optional<Task> findById(Long taskId);

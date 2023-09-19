@@ -10,9 +10,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class TaskService implements ITaskService{
+public class TaskService implements ITaskService {
 
     private final TaskRepository taskRepository;
+
     @Autowired
     public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
@@ -23,6 +24,7 @@ public class TaskService implements ITaskService{
         return this.findAll().stream().filter(task -> (task.getTaskCategory().getCategoryId().equals(categoryId)))
                 .collect(Collectors.toList());
     }
+
     @Override
     public List<Task> findAll() {
         return taskRepository.findAll();
