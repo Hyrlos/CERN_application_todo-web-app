@@ -35,7 +35,7 @@
         <label for="new-taskName">task name: </label>
       </td>
       <td>
-        <input required #taskName id="new-taskName"/><br>
+        <input #taskName id="new-taskName" required/><br>
       </td>
     </tr>
     <tr>
@@ -43,7 +43,7 @@
         <label for="new-taskDescription">task description: </label>
       </td>
       <td>
-        <input required #taskDescription id="new-taskDescription"/><br>
+        <input #taskDescription id="new-taskDescription" required/><br>
       </td>
     </tr>
     <tr>
@@ -51,7 +51,7 @@
         <label for="new-taskDeadline">task deadline: </label>
       </td>
       <td>
-        <input required #taskDeadline id="new-taskDeadline" type="date"/><br>
+        <input #taskDeadline id="new-taskDeadline" required type="date"/><br>
       </td>
     </tr>
     <tr>
@@ -59,7 +59,7 @@
         <label for="new-taskCategory">Select a category: </label>
       </td>
       <td>
-        <select required [(ngModel)]="selectedTaskCategoryId" id="new-taskCategory">
+        <select [(ngModel)]="selectedTaskCategoryId" id="new-taskCategory" required>
           <option disabled selected value="">Select a category</option>
           <option *ngFor="let taskCategory of taskCategoryList"
                   [value]="taskCategory.categoryId">{{ taskCategory.categoryName }}</option>
