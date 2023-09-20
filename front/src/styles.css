@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+ body {
+   background-color: lightgrey;
+ }
+
+h1 {
+  text-align: center;
+}
+
+p {
+  font-family: verdana, serif;
+  font-size: 20px;
+}
+
+btn {
+  background-color: lightgrey;
+}
+
+input {
+  background-color: lightgrey;
+}
