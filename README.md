@@ -87,4 +87,3 @@ After cloning the project:
 
 It was an interesting project, and I tried to provide a good overview of my knowledge. 
 I hope you will appreciate the work that has been done. 
-I completed it during my free time, and now I need to continue working on my PhD thesis manuscript.
