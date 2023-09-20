@@ -6,11 +6,13 @@ import ch.cern.todo.exception.TaskCategoryNotFoundException;
 import ch.cern.todo.service.TaskCategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.actuate.endpoint.web.annotation.RestControllerEndpoint;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RestControllerEndpoint(id = "taskCategory")
 public class TaskCategoryController {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
     private final TaskCategoryService tcService;

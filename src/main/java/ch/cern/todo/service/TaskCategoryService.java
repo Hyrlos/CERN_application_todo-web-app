@@ -12,11 +12,13 @@ import java.util.Optional;
 public class TaskCategoryService implements ITaskCategoryService {
     private final TaskService taskService;
     private final TaskCategoryRepository taskCategoryRepository;
+    private final MetricsService metricsService;
 
     @Autowired
-    public TaskCategoryService(TaskService taskService, TaskCategoryRepository taskCategoryRepository) {
+    public TaskCategoryService(TaskService taskService, TaskCategoryRepository taskCategoryRepository, MetricsService metricsService) {
         this.taskService = taskService;
         this.taskCategoryRepository = taskCategoryRepository;
+        this.metricsService = metricsService;
     }
 
     @Override
@@ -24,6 +26,7 @@ public class TaskCategoryService implements ITaskCategoryService {
         try {
             taskService.findByCategoryId(id).forEach(task -> taskService.deleteById(task.getTaskId()));
             taskCategoryRepository.deleteById(id);
+            metricsService.incrementTaskCategoryDeletedCounter();
         } catch (Exception ex) {
             System.out.println("error");
         }
@@ -41,6 +44,7 @@ public class TaskCategoryService implements ITaskCategoryService {
 
     @Override
     public TaskCategory save(TaskCategory newTaskCategory) {
+        metricsService.incrementTaskCategoryAddedCounter();
         return taskCategoryRepository.save(newTaskCategory);
     }
 }
