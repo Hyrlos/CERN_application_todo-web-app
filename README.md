@@ -77,7 +77,7 @@ After cloning the project:
 
 ![TodoListArchitecture.png](images/TodoListArchitecture.png)
 
-## Front-end (not very good-looking)
+## Front-end
 
 ![todolistApp.png](images/todolistApp.png)
 
