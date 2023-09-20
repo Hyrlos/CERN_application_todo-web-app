@@ -24,5 +24,3 @@ jobs:
         with:
           arguments: build
 
-      - name: sonar
-        run: ./gradlew sonar

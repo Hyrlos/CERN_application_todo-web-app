@@ -13,10 +13,12 @@ import java.util.stream.Collectors;
 public class TaskService implements ITaskService {
 
     private final TaskRepository taskRepository;
+    private final MetricsService metricsService;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository, MetricsService metricsService) {
         this.taskRepository = taskRepository;
+        this.metricsService = metricsService;
     }
 
     @Override
@@ -37,11 +39,13 @@ public class TaskService implements ITaskService {
 
     @Override
     public Task save(Task newTask) {
+        metricsService.incrementTaskAddedCounter();
         return taskRepository.save(newTask);
     }
 
     @Override
     public void deleteById(Long taskId) {
+        metricsService.incrementTaskDeletedCounter();
         taskRepository.deleteById(taskId);
     }
 }

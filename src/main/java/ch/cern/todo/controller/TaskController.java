@@ -6,11 +6,13 @@ import ch.cern.todo.exception.TaskNotFoundException;
 import ch.cern.todo.service.TaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.actuate.endpoint.web.annotation.RestControllerEndpoint;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RestControllerEndpoint(id = "task")
 public class TaskController {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
     private final TaskService taskService;
