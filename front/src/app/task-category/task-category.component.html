@@ -6,7 +6,6 @@
       <th>ID</th>
       <th>Title</th>
       <th>Description</th>
-      <th>Edit</th>
       <th>Remove</th>
     </tr>
     </thead>
@@ -15,7 +14,6 @@
       <td>{{ taskCategory.categoryId }}</td>
       <td>{{ taskCategory.categoryName }}</td>
       <td>{{ taskCategory.categoryDescription }}</td>
-      <td>Btn Edit</td>
       <td>
         <button (click)="delete(taskCategory)" class="delete" title="deleteTaskCategory"
                 type="button">x
@@ -33,7 +31,7 @@
         <label for="new-categoryName">task name: </label>
       </td>
       <td>
-        <input #categoryName id="new-categoryName"/>
+        <input required #categoryName id="new-categoryName"/>
       </td>
     </tr>
     <tr>
@@ -41,7 +39,7 @@
         <label for="new-categoryDescription">task description: </label>
       </td>
       <td>
-        <input #categoryDescription id="new-categoryDescription"/>
+        <input required #categoryDescription id="new-categoryDescription"/>
       </td>
     </tr>
     <tr>
