@@ -1,36 +1,57 @@
 <div class="container">
-    <h2>All Tasks Categories:</h2>
-    <table [border]="1">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Edit</th>
-            <th>Remove</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let taskCategory of taskCategoryList">
-            <td>{{ taskCategory.categoryId }}</td>
-            <td>{{ taskCategory.categoryName }}</td>
-            <td>{{ taskCategory.categoryDescription }}</td>
-            <td>Btn Edit</td>
-            <td>Btn Remove</td>
-        </tr>
-        </tbody>
-    </table>
+  <h2>All Tasks Categories:</h2>
+  <table [border]="1">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Remove</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let taskCategory of taskCategoryList">
+      <td>{{ taskCategory.categoryId }}</td>
+      <td>{{ taskCategory.categoryName }}</td>
+      <td>{{ taskCategory.categoryDescription }}</td>
+      <td>
+        <button (click)="delete(taskCategory)" class="delete" title="deleteTaskCategory"
+                type="button">x
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
-
-
+<br>
 <div>
-    <label for="new-categoryName">task name: </label>
-    <input #categoryName id="new-categoryName"/>
-    <label for="new-categoryDescription">task description: </label>
-    <input #categoryDescription id="new-categoryDescription"/>
+  <table>
+    <tr>
+      <td>
+        <label for="new-categoryName">task name: </label>
+      </td>
+      <td>
+        <input required #categoryName id="new-categoryName"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="new-categoryDescription">task description: </label>
+      </td>
+      <td>
+        <input required #categoryDescription id="new-categoryDescription"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
 
-    <button (click)="add(categoryName.value, categoryDescription.value); categoryName.value='';categoryDescription.value=''" class="add-button"
-            type="button">
-        Add category
-    </button>
+        <button
+          (click)="add(categoryName.value, categoryDescription.value); categoryName.value='';categoryDescription.value=''"
+          class="add-button"
+          type="button">
+          Add category
+        </button>
+      </td>
+    </tr>
+  </table>
 </div>
