@@ -1,4 +1,4 @@
-# CERN Todo web app
+# CERN Todo REST API and Web app
 
 ## Objective
 
