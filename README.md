@@ -49,7 +49,7 @@ proceeding to develop the corresponding tests.
 
 Some extra features were added:
 
-- **A Frontend** in AngularJS and Typescript.
+- **A Frontend** in Angular and Typescript.
 - **A CI/CD pipeline** to automate build and testing.
 - **Metrics monitoring** with Actuator and Prometheus.
 
