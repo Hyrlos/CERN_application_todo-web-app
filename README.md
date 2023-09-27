@@ -27,7 +27,7 @@ To handle unexpected errors, I've implemented two exception classes: `TaskNotFou
 The H2 database is created and populated programmatically. The `data.sql` table is generated from JPA entity classes,
 according to the provided DB schema.
 
-For quality assurance, I've included two test classes to ensure the proper functionality of the REST API.
+For quality assurance, I've included two test classes with `mockito` to ensure the proper functionality of the REST API.
 
 I followed good practices in Git project management:
 
